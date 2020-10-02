@@ -1,0 +1,235 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Plugins
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'VundleVim/Vundle.vim'
+
+call vundle#end()
+
+" ==============================================================================
+" File Type
+" ==============================================================================
+
+filetype on
+filetype plugin on
+filetype indent on
+
+" ==============================================================================
+" Tmux
+" ==============================================================================
+
+" Send xterm-style keys.
+if &term =~ '^screen'
+	execute "set <xUp>=\e[1;*A"
+	execute "set <xDown>=\e[1;*B"
+	execute "set <xRight>=\e[1;*C"
+	execute "set <xLeft>=\e[1;*D"
+endif
+
+" ==============================================================================
+" Coloring
+" ==============================================================================
+
+" Editor
+set number
+set cursorline
+hi CursorLine cterm=NONE ctermbg=52 ctermfg=white
+hi Visual cterm=NONE ctermbg=52 ctermfg=white
+hi Pmenu ctermbg=gray guibg=gray
+set background=light
+
+" White Space
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+autocmd Syntax * syn match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+" ==============================================================================
+" Highlighting
+" ==============================================================================
+
+syntax on
+
+" ==============================================================================
+" Text Formatting
+" ==============================================================================
+
+set nowrap
+set textwidth=72
+
+" Tabs
+set shiftwidth=4
+set tabstop=4
+
+" ==============================================================================
+" Spelling
+" ==============================================================================
+
+set spell
+hi clear SpellBad
+hi SpellBad cterm=underline
+set spell spelllang=en,br,fr
+
+" ==============================================================================
+" Folding
+" ==============================================================================
+
+set foldmethod=syntax
+set nofoldenable
+set foldlevel=100
+
+" ==============================================================================
+" File Searching
+" ==============================================================================
+
+set wildmenu
+set wildmode=longest:full,full
+set path=$PWD/**
+
+" ==============================================================================
+" NERDTree
+" ==============================================================================
+
+" Auto start.
+autocmd vimenter * NERDTree
+
+" Move cursor to file.
+autocmd VimEnter * wincmd p
+
+" Layout.
+let g:NERDTreeWinPos = "left"
+let g:NERDTreeWinSize=30
+
+" Auto close.
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"
+" Black list.
+let NERDTreeIgnore = ['\.aux$','\.acn$','\.acn$','\.bbl$','\.bcf$','\.glo$','\.idx$','\.ist$']
+let NERDTreeIgnore += ['\.log$']
+let NERDTreeIgnore += ['\.toc$','\.o$', '\.d$']
+let NERDTreeIgnore += ['\.class$']
+let NERDTreeIgnore += ['nanvix-cluster-']
+let NERDTreeIgnore += ['compile_commands.json']
+
+
+let g:nerdtree_tabs_open_on_console_startup=1 " Auto start.
+
+" ==============================================================================
+" Tagbar
+" ==============================================================================
+
+highlight TagbarHighlight term=reverse cterm=reverse gui=reverse
+autocmd FileType c,cpp,go nested :TagbarOpen
+let g:tagbar_foldlevel = 99
+" autocmd bufenter * :TagbarSetFoldlevel! 99
+
+" ==============================================================================
+" YouCompleteMe
+" ==============================================================================
+
+let g:ycm_filetype_whitelist = {'*': 1}
+
+let g:ycm_filetype_blacklist = {
+      \ 'tagbar': 1,
+      \ 'notes': 1,
+      \ 'markdown': 1,
+      \ 'netrw': 1,
+      \ 'unite': 1,
+      \ 'tex': 1,
+      \ 'text': 1,
+      \ 'vimwiki': 1,
+      \ 'pandoc': 1,
+      \ 'infolog': 1,
+      \ 'leaderf': 1,
+      \ 'mail': 1
+\}
+
+let g:ycm_complete_in_strings=0
+let g:ycm_complete_in_comments=0
+let g:ycm_auto_trigger=0
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_show_diagnostics_ui=0
+
+" ==============================================================================
+" Tabs
+" ==============================================================================
+
+if exists("+showtabline")
+    function! MyTabLine()
+        let s = ''
+        let wn = ''
+        let t = tabpagenr()
+        let i = 1
+        while i <= tabpagenr('$')
+            let buflist = tabpagebuflist(i)
+            let winnr = tabpagewinnr(i)
+            let s .= '%' . i . 'T'
+            let s .= (i == t ? '%1*' : '%2*')
+            let s .= ' '
+            let wn = tabpagewinnr(i,'$')
+
+            let s .= '%#TabNum#'
+            let s .= i
+            " let s .= '%*'
+            let s .= (i == t ? '%#TabLineSel#' : '%#TabLine#')
+            let bufnr = buflist[winnr - 1]
+            let file = bufname(bufnr)
+            let buftype = getbufvar(bufnr, 'buftype')
+            if buftype == 'nofile'
+                if file =~ '\/.'
+                    let file = substitute(file, '.*\/\ze.', '', '')
+                endif
+            else
+                let file = fnamemodify(file, ':p:t')
+            endif
+            if file == ''
+                let file = '[No Name]'
+            endif
+            let s .= ' ' . file . ' '
+            let i = i + 1
+        endwhile
+        let s .= '%T%#TabLineFill#%='
+        let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
+        return s
+    endfunction
+    set stal=2
+    set tabline=%!MyTabLine()
+    set showtabline=1
+    highlight link TabNum Special
+endif
+
+" ==============================================================================
+" Keyboard Mapping
+" ==============================================================================
+
+" Maximize/Minimize
+noremap <C-W>M <C-W>\| <C-W>_
+nnoremap <C-W>m <C-W>=
+
+nmap <CR> :ts <C-r><C-w><CR>
+nmap <BS> :pop<CR>
+nmap <F2> :wa<CR>:make!<CR>
+nmap <F8> :TagbarToggle<CR>
+nmap <F9> :NERDTreeTabsToggle<CR>
+nmap <F5> :NERDTreeFind<CR>
+nmap <C-f> :tabfind<space>
+nmap <C-s> :vert sf<space>
+let mapleader = " "
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <C-l> :%s/\s\+$//e<CR>
