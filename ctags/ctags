@@ -1,0 +1,7 @@
+--recurse=yes
+--exclude=.git
+--c-kinds=+p+x
+--c-types=+p
+--file-scope=yes
+--fields=-k
+--fields=+aKS
