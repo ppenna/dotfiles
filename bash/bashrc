@@ -118,7 +118,10 @@ fi
 
 #===============================================================================
 
-# Disable SIGSTOP for VIM
+# Enable variable expansion.
+shopt -s direxpand
+
+# Disable SIGSTOP for VIM.
 stty stop ""
 
 # Dot Files
