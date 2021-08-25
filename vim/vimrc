@@ -214,15 +214,15 @@ endif
 noremap <C-W>M <C-W>\| <C-W>_
 nnoremap <C-W>m <C-W>=
 
-nmap <CR> :ts <C-r><C-w><CR>
-nmap <BS> :pop<CR>
+let mapleader = " "
+nmap <C-j> :ts<CR>
+nmap <C-p> :pop<CR>
 nmap <F2> :wa<CR>:make!<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F9> :NERDTreeTabsToggle<CR>
 nmap <F5> :NERDTreeFind<CR>
 nmap <C-f> :tabfind<space>
 nmap <C-s> :vert sf<space>
-let mapleader = " "
 noremap <leader>1 1gt
 noremap <leader>2 2gt
 noremap <leader>3 3gt
