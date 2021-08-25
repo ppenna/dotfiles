@@ -12,6 +12,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'rust-lang/rust.vim'
 
 call vundle#end()
 
@@ -127,7 +128,7 @@ let g:nerdtree_tabs_open_on_console_startup=1 " Auto start.
 " ==============================================================================
 
 highlight TagbarHighlight term=reverse cterm=reverse gui=reverse
-autocmd FileType c,cpp,go nested :TagbarOpen
+autocmd FileType c,cpp,go,rust nested :TagbarOpen
 let g:tagbar_foldlevel = 99
 " autocmd bufenter * :TagbarSetFoldlevel! 99
 
@@ -157,6 +158,12 @@ let g:ycm_complete_in_comments=0
 let g:ycm_auto_trigger=0
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_show_diagnostics_ui=0
+
+" ==============================================================================
+" Tags
+" ==============================================================================
+
+set tags=./tags;,tags;$HOME;
 
 " ==============================================================================
 " Tabs
