@@ -12,6 +12,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'Chiel92/vim-autoformat'
 Plugin 'rust-lang/rust.vim'
 
 call vundle#end()
@@ -69,6 +70,14 @@ set textwidth=72
 " Tabs
 set shiftwidth=4
 set tabstop=4
+
+let g:formatdef_rustfmt = '"rustfmt"'
+let g:formatters_rust = ['rustfmt']
+let g:formatdef_clangfmt = '"clang-format -style Microsoft"'
+let g:formatters_c = ['clangfmt']
+let g:formatters_cpp = ['clangfmt']
+
+au BufWrite *.{rs,c,cpp} :Autoformat
 
 " ==============================================================================
 " Spelling
