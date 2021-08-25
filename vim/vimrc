@@ -12,6 +12,8 @@ Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'rust-lang/rust.vim'
 
 call vundle#end()
 
@@ -68,6 +70,14 @@ set textwidth=72
 " Tabs
 set shiftwidth=4
 set tabstop=4
+
+let g:formatdef_rustfmt = '"rustfmt"'
+let g:formatters_rust = ['rustfmt']
+let g:formatdef_clangfmt = '"clang-format -style Microsoft"'
+let g:formatters_c = ['clangfmt']
+let g:formatters_cpp = ['clangfmt']
+
+au BufWrite *.{rs,c,cpp} :Autoformat
 
 " ==============================================================================
 " Spelling
@@ -127,7 +137,7 @@ let g:nerdtree_tabs_open_on_console_startup=1 " Auto start.
 " ==============================================================================
 
 highlight TagbarHighlight term=reverse cterm=reverse gui=reverse
-autocmd FileType c,cpp,go nested :TagbarOpen
+autocmd FileType c,cpp,go,rust nested :TagbarOpen
 let g:tagbar_foldlevel = 99
 " autocmd bufenter * :TagbarSetFoldlevel! 99
 
@@ -157,6 +167,12 @@ let g:ycm_complete_in_comments=0
 let g:ycm_auto_trigger=0
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_show_diagnostics_ui=0
+
+" ==============================================================================
+" Tags
+" ==============================================================================
+
+set tags=./tags;,tags;$HOME;
 
 " ==============================================================================
 " Tabs
@@ -214,15 +230,15 @@ endif
 noremap <C-W>M <C-W>\| <C-W>_
 nnoremap <C-W>m <C-W>=
 
-nmap <CR> :ts <C-r><C-w><CR>
-nmap <BS> :pop<CR>
+let mapleader = " "
+nmap <C-j> :ts<CR>
+nmap <C-p> :pop<CR>
 nmap <F2> :wa<CR>:make!<CR>
 nmap <F8> :TagbarToggle<CR>
 nmap <F9> :NERDTreeTabsToggle<CR>
 nmap <F5> :NERDTreeFind<CR>
 nmap <C-f> :tabfind<space>
 nmap <C-s> :vert sf<space>
-let mapleader = " "
 noremap <leader>1 1gt
 noremap <leader>2 2gt
 noremap <leader>3 3gt
