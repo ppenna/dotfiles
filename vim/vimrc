@@ -65,7 +65,6 @@ syntax on
 " ==============================================================================
 
 set nowrap
-set textwidth=72
 
 " Tabs
 set shiftwidth=4
