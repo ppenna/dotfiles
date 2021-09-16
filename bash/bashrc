@@ -128,15 +128,3 @@ stty stop ""
 export BASHRC=$HOME/.bashrc
 export VIMRC=$HOME/.vimrc
 export TMUX_CONF=$HOME/.tmux.conf
-
-export THESIS=$HOME/phd-thesis
-export PAPERS=$THESIS/publications
-
-export NANVIX_ROOT=$THESIS/code/nanvix
-export LIBMPI_ROOT=$NANVIX_ROOT/contrib/libmpi
-export MULTIKERNEL_ROOT=$LIBMPI_ROOT/contrib/multikernel
-export ULIBC_ROOT=$MULTIKERNEL_ROOT/contrib/ulibc
-export LIBNANVIX_ROOT=$ULIBC_ROOT/contrib/libnanvix
-export MICROKERNEL_ROOT=$LIBNANVIX_ROOT/contrib/microkernel
-export HAL_ROOT=$MICROKERNEL_ROOT/contrib/hal
-export BARELIB_ROOT=$HAL_ROOT/contrib/barelib
