@@ -1,7 +1,5 @@
-alias nanvix="/opt/dotfiles/scripts/start-nanvix.sh"
 alias upload='rsync -avz --delete-after --exclude="*.o" --exclude=".git" --exclude="*.swp" --exclude="doc"'
 alias git-hash='git rev-parse --short'
 alias clean='find . -type f -name '*.o' -delete;find . -type f -name '*.a' -delete'
-alias unix64='export TARGET=unix64'
 alias make='make -j'
 alias watch='watch --color'
