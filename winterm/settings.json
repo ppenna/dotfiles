@@ -381,6 +381,6 @@
             "yellow": "#808000"
         }
     ],
-    "startOnUserLogin": true,
+    "startOnUserLogin": false,
     "theme": "dark"
 }
