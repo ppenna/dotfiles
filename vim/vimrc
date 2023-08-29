@@ -107,10 +107,10 @@ set path=$PWD/**
 " ==============================================================================
 
 " Auto start.
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 
 " Move cursor to file.
-autocmd VimEnter * wincmd p
+" autocmd VimEnter * wincmd p
 
 " Layout.
 let g:NERDTreeWinPos = "left"
