@@ -10,7 +10,6 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'rust-lang/rust.vim'
@@ -128,44 +127,16 @@ let NERDTreeIgnore += ['\.class$']
 let NERDTreeIgnore += ['nanvix-cluster-']
 let NERDTreeIgnore += ['compile_commands.json']
 
-
-let g:nerdtree_tabs_open_on_console_startup=1 " Auto start.
+" let g:nerdtree_tabs_open_on_console_startup=1 " Auto start.
 
 " ==============================================================================
 " Tagbar
 " ==============================================================================
 
 highlight TagbarHighlight term=reverse cterm=reverse gui=reverse
-autocmd FileType c,cpp,go,rust nested :TagbarOpen
+" autocmd FileType c,cpp,go,rust nested :TagbarOpen
 let g:tagbar_foldlevel = 99
 " autocmd bufenter * :TagbarSetFoldlevel! 99
-
-" ==============================================================================
-" YouCompleteMe
-" ==============================================================================
-
-let g:ycm_filetype_whitelist = {'*': 1}
-
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar': 1,
-      \ 'notes': 1,
-      \ 'markdown': 1,
-      \ 'netrw': 1,
-      \ 'unite': 1,
-      \ 'tex': 1,
-      \ 'text': 1,
-      \ 'vimwiki': 1,
-      \ 'pandoc': 1,
-      \ 'infolog': 1,
-      \ 'leaderf': 1,
-      \ 'mail': 1
-\}
-
-let g:ycm_complete_in_strings=0
-let g:ycm_complete_in_comments=0
-let g:ycm_auto_trigger=0
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_show_diagnostics_ui=0
 
 " ==============================================================================
 " Tags
