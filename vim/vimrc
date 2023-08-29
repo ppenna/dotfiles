@@ -71,7 +71,7 @@ set tabstop=4
 
 let g:formatdef_rustfmt = '"rustfmt"'
 let g:formatters_rust = ['rustfmt']
-let g:formatdef_clangfmt = '"clang-format -style Microsoft"'
+let g:formatdef_clangfmt = '"clang-format --style=file:$HOME/.clang-format --fallback-style Microsoft"'
 let g:formatters_c = ['clangfmt']
 let g:formatters_cpp = ['clangfmt']
 
